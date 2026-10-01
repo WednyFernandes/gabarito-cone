@@ -1,68 +1,82 @@
-# Gabarito de Cone para Designers – Molde SVG de Adesivo para Copo, Balde e Caneca Cônica
+# Gabarito Cone: truncated cone template generator (SVG) for cup, bucket and tumbler stickers
 
-Você é **designer gráfico** e precisa aplicar arte em copo, balde de pipoca ou caneca cônica? Esta ferramenta gera o **gabarito vetorial (SVG) do tronco de cone planificado** em escala real, pronto para abrir no **Illustrator, CorelDRAW, Inkscape, Affinity Designer ou Figma** e usar como máscara de recorte da sua arte. Chega de rótulo torto, emenda que não fecha e arte cortada.
+![Gabarito Cone: free SVG template generator for wrapping labels and stickers on conical cups, popcorn buckets and tumblers](assets/hero.png)
 
-![Python](https://img.shields.io/badge/python-3.8%2B-blue) ![SVG](https://img.shields.io/badge/sa%C3%ADda-SVG%20vetorial-orange) ![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-lightgrey)
+**Gabarito Cone** is a small desktop tool for graphic designers that generates the flat pattern (development) of a truncated cone as a 1:1 scale SVG, so you can wrap a label or sticker around a conical cup, popcorn bucket or tapered mug without crooked seams; it is written in Python with a pywebview window.
 
-## Por que designers usam
+You enter the top diameter, bottom diameter and height in centimeters. The tool draws the annular sector (the curved label shape), adds an optional seam overlap, and saves `gabarito.svg` ready to open in Illustrator, CorelDRAW, Inkscape, Affinity Designer or Figma.
 
-- **Vetor em escala 1:1** – importa direto no seu software sem redimensionar
-- **Molde correto na primeira tentativa** – a curvatura do adesivo é calculada, não estimada
-- **Margem de emenda / sangria** configurável para colagem e acabamento
-- **Área do gabarito** exibida para orçar vinil, papel adesivo ou sublimático
-- Funciona **offline**, sem cadastro, sem marca d'água
+> Truncated cone template · cone flat pattern · conical label template · cup wrap template · popcorn bucket template · sublimation tumbler template · SVG clipping mask · gabarito de copo
 
-## Casos de uso
+## Features
 
-| Produto | Aplicação |
+- **1:1 scale vector output.** The SVG is sized in millimeters, so it imports at real size with no resizing.
+- **Exact curvature.** The arc of the label is calculated from the cone geometry, not estimated.
+- **Seam overlap (margem de emenda).** Add an overlap in cm for gluing. It is drawn as a dashed orange line.
+- **Measurements panel.** Outer radius, inner radius, sector angle, width, height and area (cm²), useful to quote vinyl, adhesive paper or sublimation paper.
+- **Cylinder support.** If top and bottom diameters are equal, it outputs a plain rectangle with the circumference.
+- **Either orientation.** Works for cups that are wider at the top or at the bottom; the larger diameter always maps to the outer arc.
+- No account, no watermark. The math runs locally in Python.
+
+## Use cases
+
+| Product | Application |
 |---|---|
-| Copo de papel / plástico / long drink cônico | Rótulo envolvente, adesivo promocional |
-| Balde de pipoca e balde de gelo | Arte de cinema, festas, brindes |
-| Caneca e copo cônico para sublimação | Estampa 360° sem distorção |
-| Vaso, cachepô, embalagem cônica | Etiqueta de marca, kit presente |
-| Mockup e apresentação para cliente | Base geométrica precisa para a arte final |
+| Conical paper or plastic cup, long drink glass | Wrap-around label, promotional sticker |
+| Popcorn bucket, ice bucket | Cinema, party and giveaway artwork |
+| Conical mug or tumbler for sublimation | 360° print without distortion |
+| Vase, planter cover, conical packaging | Brand label, gift kit |
+| Client mockups | Precise geometric base for the final artwork |
 
-## Fluxo de trabalho no seu editor
+## Install
 
-1. Rode a ferramenta, informe **diâmetro do topo, da base e altura** (cm)
-2. Clique **Gerar Gabarito** → **Salvar SVG** (`gabarito.svg` na Área de Trabalho)
-3. Importe o SVG no **Illustrator / CorelDRAW / Inkscape**
-4. Use o caminho azul como **máscara de recorte (clipping mask / PowerClip)** sobre sua arte
-5. A linha tracejada laranja marca a **emenda** – mantenha logos e textos fora dela
-6. Exporte em PDF/X ou envie o SVG para corte em plotter
-
-> Dica: para arte envolvente contínua, distorça o layout com *Envelope* / *Arc* seguindo o ângulo mostrado no gabarito.
-
-## Instalação
+Requires Python 3 and [pywebview](https://pywebview.flowrl.com/).
 
 ```bash
 pip install pywebview
 python gabarito_cone.py
 ```
 
-## O que a ferramenta calcula
+The window styles itself with Tailwind CSS loaded from a CDN, so the first launch looks best with an internet connection.
 
-Para diâmetros `D` (base), `d` (topo) e altura `h`:
+## Usage in your design software
 
-- Altura do cone completo: `H = h · D / (D − d)`
-- Raio externo do gabarito (geratriz maior): `S₁ = √((D/2)² + H²)`
-- Raio interno (geratriz menor): `S₂ = √((d/2)² + (H − h)²)`
-- Ângulo do setor: `θ = 360° · D / (2·S₁)`
+1. Run the tool and enter the **top diameter**, **bottom diameter** and **height** in cm (plus the seam overlap if you want one).
+2. Click **Gerar Gabarito** (generate), then **Salvar SVG** (save). The file is written to `gabarito.svg` on your Desktop.
+3. Import the SVG into Illustrator, CorelDRAW or Inkscape.
+4. Use the blue path as a **clipping mask** (PowerClip in CorelDRAW) over your artwork.
+5. The dashed orange line marks the **seam**. Keep logos and text away from it.
+6. Export to PDF/X, or send the SVG to a cutting plotter.
 
-Se topo = base, gera um retângulo (cilindro).
+> Tip: for continuous wrap-around artwork, bend the layout with *Envelope* or *Arc* following the angle shown on the template.
 
-## Perguntas frequentes
+## How the template is calculated
 
-**O SVG abre no Photoshop?** Abre como objeto inteligente, mas para recorte vetorial prefira Illustrator ou CorelDRAW.
+For bottom diameter `D`, top diameter `d` and height `h`:
 
-**Qual medida usar, interna ou externa?** Use o **diâmetro externo** do produto, onde o adesivo vai colar.
+- Full cone height: `H = h · D / (D − d)`
+- Outer radius of the template (larger slant height): `S₁ = √((D/2)² + H²)`
+- Inner radius (smaller slant height): `S₂ = √((d/2)² + (H − h)²)`
+- Sector angle: `θ = 360° · D / (2·S₁)`
 
-**Posso usar em produção comercial?** Sim, licença MIT.
+If top equals bottom, the shape is a rectangle (cylinder) with width `π · d`.
 
-## Palavras-chave
+## Project structure
 
-gabarito cone designer, molde adesivo copo illustrator, gabarito balde de pipoca corel, planificação cone truncado svg, rótulo copo cônico vetor, template adesivo copo, molde caneca cônica sublimação, máscara de recorte copo, gabarito copo long drink, gerador de gabarito svg
+```
+gabarito_cone.py   # everything: embedded HTML UI, geometry, SVG generation, save to Desktop
+```
 
-## Licença
+## FAQ
 
-MIT
+**Which measurement should I use, inner or outer diameter?**
+Use the **outer diameter** of the product, where the sticker will be applied.
+
+**Does the SVG open in Photoshop?**
+It opens as a smart object. For vector clipping, Illustrator or CorelDRAW work better.
+
+**What if my cup is wider at the bottom than at the top?**
+That works too. The tool always puts the larger diameter on the outer arc and labels each edge TOPO (top) or BASE (bottom).
+
+**Where is the file saved?**
+`gabarito.svg` in your Desktop folder. Saving again overwrites it.

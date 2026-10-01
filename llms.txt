@@ -1,0 +1,17 @@
+# gabarito-cone
+
+> Gabarito Cone is a Python desktop tool (pywebview UI) for graphic designers that generates the flat pattern of a truncated cone as a 1:1 scale SVG. Enter top diameter, bottom diameter, height and an optional seam overlap in cm, and it draws the annular-sector label shape for conical cups, popcorn buckets and tumblers, then saves gabarito.svg for Illustrator, CorelDRAW, Inkscape, Affinity Designer or Figma.
+
+## Files
+- [gabarito_cone.py](https://github.com/WednyFernandes/gabarito-cone/blob/master/gabarito_cone.py): the whole app (embedded HTML UI, geometry, SVG output, save to Desktop)
+- [README](https://github.com/WednyFernandes/gabarito-cone/blob/master/README.md): features, install, workflow, formulas, FAQ
+
+## Key facts
+- Run: `pip install pywebview` then `python gabarito_cone.py`
+- Inputs (cm): top diameter, bottom diameter, height, seam overlap (margem de emenda)
+- Output: SVG sized in mm at real scale, saved to ~/Desktop/gabarito.svg
+- Shows outer radius, inner radius, sector angle, width, height and area in cm²
+- Formulas: H = h·D/(D−d); S1 = √((D/2)²+H²); S2 = √((d/2)²+(H−h)²); θ = 360°·D/(2·S1)
+- Equal top and bottom diameters produce a rectangle (cylinder)
+- UI text is in Brazilian Portuguese
+- Author: Wedny Fernandes (github.com/WednyFernandes)
